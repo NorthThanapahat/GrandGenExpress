@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { AuthGuard } from './shared';
 import { ApiProvider } from './shared/services/api';
 import { FormsModule } from '@angular/forms';
+import { ManageUserComponent } from './layout/manage-user/manage-user.component';
 
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) => {
