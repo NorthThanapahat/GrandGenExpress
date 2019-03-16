@@ -12,6 +12,7 @@ export class SidebarComponent implements OnInit {
     collapsed: boolean;
     showMenu: string;
     pushRightClass: string;
+    isExpand:string;
 
     @Output() collapsedEvent = new EventEmitter<boolean>();
 

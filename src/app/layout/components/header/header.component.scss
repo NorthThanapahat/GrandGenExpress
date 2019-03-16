@@ -12,6 +12,9 @@ $topnav-background-color: #222;
             }
         }
     }
+    .dropdown-menu-right{
+        left: auto !important;
+    }
     .messages {
         width: 300px;
         .media {

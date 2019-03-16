@@ -41,6 +41,9 @@ $topnav-background-color: #222;
             background: darken($topnav-background-color, 5%);
             color: #fff;
         }
+        .item-submenu{
+            font-size: 12px;
+        }
         .header-fields {
             padding-top: 10px;
         

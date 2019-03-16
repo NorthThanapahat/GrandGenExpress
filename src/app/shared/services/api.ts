@@ -19,14 +19,10 @@ export class ApiProvider{
     }
     loginPost(data) {
         return new Promise((resolve, reject) => {
-    
           let headers = this.setHeader();
-    
           const req = JSON.stringify(data);
-    
           console.log('login data ===>', data);
           console.log('login data json', req);
-    
     
           this.http.post(ConfigApi.login_url, req, { headers: headers })
             .subscribe(res => {
@@ -38,5 +34,20 @@ export class ApiProvider{
         });
     
       }
+     UserDetailsPost(data) {
+        return new Promise((resolve, reject) => {
+          let headers = this.setHeader();
+          const req = JSON.stringify(data);
+          console.log('userDetail data json', req);
     
+          this.http.post(ConfigApi.userDetails_url, req, { headers: headers })
+            .subscribe(res => {
+              console.log('userDetail response ===>', res);
+              resolve(res);
+            }, (err) => {
+              reject(err);
+            });
+        });
+    
+      }
 }

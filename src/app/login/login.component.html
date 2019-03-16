@@ -1,18 +1,25 @@
 <div class="login-page" [@routerTransition]>
     <div class="row justify-content-md-center">
         <div class="col-md-4">
-            <img src="./assets/images/logo.png" width="150px" class="user-avatar" />
-            <h1>GrandGenExpress</h1>
+           
+            <h1><b>GrandGenExpress</b></h1>
             <form role="form">
                 <div class="form-content">
                     <div class="form-group">
-                        <input type="text" name="username" [(ngModel)]="username" class="form-control input-underline input-lg" id="" placeholder="{{ 'UserId' | translate }}">
+                        <input type="text" [ngClass]="{'error-input': errorItem.username}" name="username" [(ngModel)]="username" class="form-control input-underline input-lg" id="" placeholder="{{ 'UserId' | translate }}" required>
+                        
                     </div>
 
                     <div class="form-group">
-                        <input type="password" name="password" [(ngModel)]="password" class="form-control input-underline input-lg" id="" placeholder="{{ 'Password' | translate }}">
+                        <input ngcla type="password" [ngClass]="{'error-input': errorItem.password}"  name="password"  [(ngModel)]="password" class="form-control input-underline input-lg" id="" placeholder="{{ 'Password' | translate }}">
+                       
                     </div>
+
+                    <div class="invalid-feedback d-block" *ngIf="error || errorItem.username || errorItem.password" required>
+                        {{message}}
+                      </div>
                 </div>
+                
                 <a class="btn rounded-btn" (click)="onLoggedin()">{{ 'Log in' | translate }}</a>
                 &nbsp;
             </form>

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { ApiProvider } from '../../../shared/services/api'
+import { UserDetails } from 'src/app/model/response/user_detail';
 
 @Component({
     selector: 'app-header',
@@ -9,14 +11,19 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class HeaderComponent implements OnInit {
     public pushRightClass: string;
-
-    constructor(private translate: TranslateService, public router: Router) {
+    public user : any;
+    public userDetail :UserDetails;
+ 
+    constructor(
+        private translate: TranslateService,
+         public router: Router,
+         public api : ApiProvider) {
 
         this.translate.addLangs(['en', 'fr', 'ur', 'es', 'it', 'fa', 'de', 'zh-CHS']);
         this.translate.setDefaultLang('en');
         const browserLang = this.translate.getBrowserLang();
         this.translate.use(browserLang.match(/en|fr|ur|es|it|fa|de|zh-CHS/) ? browserLang : 'en');
-
+        
         this.router.events.subscribe(val => {
             if (
                 val instanceof NavigationEnd &&
@@ -26,12 +33,23 @@ export class HeaderComponent implements OnInit {
                 this.toggleSidebar();
             }
         });
+        this.user = JSON.parse(localStorage.getItem("user"));
+        this.userDetail = JSON.parse(localStorage.getItem("userDetail"));
+        console.log(this.user);
+        console.log(this.userDetail);
+        
+      
+     
     }
 
     ngOnInit() {
         this.pushRightClass = 'push-right';
+        
+       
+       
     }
-
+  
+  
     isToggled(): boolean {
         const dom: Element = document.querySelector('body');
         return dom.classList.contains(this.pushRightClass);
@@ -48,7 +66,7 @@ export class HeaderComponent implements OnInit {
     }
 
     onLoggedout() {
-        localStorage.removeItem('isLoggedin');
+        localStorage.clear();
     }
 
     changeLang(language: string) {
